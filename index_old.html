@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フードピクト 2026 — 千房アレルギー情報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Shippori+Mincho:wght@700&amp;display=swap" rel="stylesheet">
+
+<style>
+
+
+:root{
+  --chibo-red:#C0392B;
+  --chibo-dark:#8B0000;
+  --chibo-gold:#C9A84C;
+  --chibo-gold-l:rgba(201,168,76,.15);
+  --chibo-gold-m:rgba(201,168,76,.30);
+  --chibo-ink:#1A1A1A;
+  --chibo-ink2:#3D2B1F;
+  --washi:#FAF7F0;
+  --washi2:#F3EDE2;
+  --washi3:#EDE4D4;
+  --border:#D4C5A9;
+  --border2:#C8B99A;
+  --text:#1A1A1A;
+  --text-sub:#5C4A3A;
+  --text-muted:#9C8570;
+  --red-l:rgba(192,57,43,.10);
+  --red-m:rgba(192,57,43,.22);
+  --green:#2D7A4F;
+  --green-l:rgba(45,122,79,.10);
+  --green-m:rgba(45,122,79,.22);
+  --amber:#B8860B;
+  --amber-l:rgba(184,134,11,.10);
+  --amber-m:rgba(184,134,11,.22);
+  --admin:#5B4FBE;
+  --admin-l:rgba(91,79,190,.10);
+  --admin-m:rgba(91,79,190,.20);
+  --blue20:#1565C0;
+  --blue20-l:rgba(21,101,192,.10);
+  --blue20-m:rgba(21,101,192,.25);
+  --radius:8px;
+  --tr:.18s cubic-bezier(.4,0,.2,1);
+  --header-h:68px;
+  --sidebar-w:290px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans JP",sans-serif;background:var(--washi);color:var(--text);min-height:100vh;}
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:var(--header-h);
+  background:linear-gradient(135deg,var(--chibo-dark) 0%,var(--chibo-red) 100%);
+  border-bottom:3px solid var(--chibo-gold);
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+  box-shadow:0 2px 12px rgba(139,0,0,.35);
+}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo-icon{
+  width:40px;height:40px;
+  background:var(--chibo-gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.logo-main{display:flex;flex-direction:column;gap:1px;}
+.logo-text{
+  font-family:"Shippori Mincho",serif;
+  font-size:20px;font-weight:700;
+  color:#fff;letter-spacing:2px;
+  text-shadow:0 1px 3px rgba(0,0,0,.3);
+}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.75);letter-spacing:1px;}
+.logo-year{
+  font-size:11px;font-weight:700;
+  color:var(--chibo-ink);background:var(--chibo-gold);
+  padding:2px 10px;border-radius:3px;letter-spacing:1px;
+}
+.legend-pill{
+  display:flex;gap:12px;align-items:center;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  border-radius:20px;padding:6px 16px;font-size:12px;color:rgba(255,255,255,.9);
+}
+.legend-pill .lp{display:flex;align-items:center;gap:5px;}
+.admin-badge{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-size:11px;font-weight:700;
+  padding:5px 14px;border-radius:20px;cursor:pointer;transition:all var(--tr);
+  font-family:inherit;
+}
+.admin-badge:hover{background:rgba(255,255,255,.25);}
+.admin-badge.active{background:var(--chibo-gold);color:var(--chibo-ink);border-color:var(--chibo-gold);}
+
+.app{display:flex !important;flex-direction:row !important;padding-top:var(--header-h);height:100vh;overflow:hidden;}
+
+aside{
+  width:290px !important;
+  min-width:290px !important;
+  max-width:290px !important;
+  flex-shrink:0 !important;
+  background:linear-gradient(180deg,var(--washi) 0%,var(--washi2) 100%);
+  border-right:2px solid var(--border2);
+  height:calc(100vh - var(--header-h));
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+ 
+.sb-filter-section{
+  flex-shrink:0;
+  padding:12px 14px 10px;
+  border-bottom:1px solid var(--border2);
+}
+ 
+.sb-search-section{
+  flex-shrink:0;
+  padding:10px 14px;
+  border-bottom:1px solid var(--border2);
+}
+ 
+.sb-cat-section{
+  flex:1;
+  overflow-y:auto;
+  padding:10px 14px 14px;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+ 
+.sb-filter-section .sb-section,
+.sb-search-section .sb-section,
+.sb-cat-section .sb-section{margin-bottom:0;}
+ 
+.sb-filter-section .allergen-grid{
+  max-height:260px;
+  overflow-y:auto;
+  scrollbar-width:thin;
+}
+/* サイドバーの品目区分凡例 */
+.sb-allergy-legend{
+  display:flex;gap:8px;flex-wrap:wrap;
+  font-size:10px;margin-bottom:6px;
+  padding:4px 0;border-bottom:1px dashed var(--border);
+}
+.sb-legend-item{display:flex;align-items:center;gap:4px;}
+.sb-legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+.sb-section{margin-bottom:22px;}
+.sb-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text-muted);
+  margin-bottom:10px;padding:0 4px 6px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:6px;
+}
+.sb-label::before{content:'';width:3px;height:12px;border-radius:2px;background:var(--chibo-red);}
+
+.search-wrap{position:relative;}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--text-muted);pointer-events:none;}
+#search{
+  width:100%;background:#fff;border:1.5px solid var(--border2);
+  border-radius:var(--radius);color:var(--text);font-size:13px;
+  font-family:inherit;padding:9px 12px 9px 32px;outline:none;
+  transition:border-color var(--tr);
+}
+#search:focus{border-color:var(--chibo-red);box-shadow:0 0 0 3px var(--red-l);}
+#search::placeholder{color:var(--text-muted);}
+
+.cat-btn{
+  display:flex;align-items:center;gap:8px;width:100%;
+  padding:8px 10px;border-radius:6px;border:none;
+  background:transparent;color:var(--text-sub);
+  font-size:13px;font-family:inherit;cursor:pointer;
+  transition:all var(--tr);text-align:left;margin-bottom:2px;
+}
+.cat-btn:hover{background:var(--washi3);color:var(--text);}
+.cat-btn.active{background:var(--red-l);color:var(--chibo-red);font-weight:700;border-left:3px solid var(--chibo-red);padding-left:8px;}
+.cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.cat-count{margin-left:auto;font-size:11px;background:var(--washi3);border-radius:4px;padding:1px 6px;color:var(--text-muted);}
+.cat-btn.active .cat-count{background:var(--red-m);color:var(--chibo-red);}
+
+.allergen-tab-bar{display:flex;gap:4px;margin-bottom:12px;}
+.allergen-tab-btn{
+  flex:1;padding:6px 4px;font-size:11px;font-weight:700;font-family:inherit;
+  border-radius:6px;border:1.5px solid var(--border2);
+  background:var(--washi2);color:var(--text-muted);cursor:pointer;
+  transition:all var(--tr);text-align:center;line-height:1.3;
+}
+.allergen-tab-btn:hover{border-color:var(--chibo-red);color:var(--chibo-red);}
+.allergen-tab-btn.active-tab{background:var(--chibo-red);border-color:var(--chibo-red);color:#fff;}
+.allergen-tab-btn .tab-badge{
+  display:inline-block;font-size:9px;font-weight:900;
+  background:var(--chibo-gold);color:var(--chibo-ink);
+  border-radius:3px;padding:0 4px;margin-left:3px;vertical-align:middle;
+}
+.allergen-tab-btn.active-tab .tab-badge{background:rgba(255,255,255,.3);color:#fff;}
+
+.filter-mode{display:flex;gap:5px;margin-bottom:10px;}
+.mode-btn{
+  flex:1;padding:6px 4px;font-size:11px;font-family:inherit;
+  background:var(--washi2);border:1.5px solid var(--border2);
+  color:var(--text-muted);border-radius:6px;cursor:pointer;
+  transition:all var(--tr);line-height:1.4;text-align:center;
+}
+.mode-btn.active{background:var(--amber-l);border-color:var(--amber);color:var(--amber);font-weight:700;}
+
+.allergen-grid{display:block;}
+.a-chip{
+  padding:5px 10px;border-radius:5px;
+  border:1.5px solid var(--border2);background:#fff;
+  color:var(--text-sub);font-size:12px;font-family:inherit;
+  cursor:pointer;transition:all var(--tr);white-space:nowrap;font-weight:500;
+}
+.a-chip:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-l);}
+.a-chip.sel{background:var(--amber-l);border-color:var(--amber);color:var(--amber);font-weight:700;box-shadow:0 0 0 1px var(--amber);}
+.a-chip.big8{border-color:var(--chibo-red);color:var(--chibo-red);}
+.a-chip.big8.sel{background:var(--red-l);border-color:var(--chibo-red);color:var(--chibo-red);box-shadow:0 0 0 1px var(--chibo-red);}
+.a-chip.twenty-chip{border-color:var(--blue20);color:var(--blue20);}
+.a-chip.twenty-chip.sel{background:var(--blue20-l);border-color:var(--blue20);color:var(--blue20);box-shadow:0 0 0 1px var(--blue20);}
+/* ピクトアイコン表示 */
+.a-chip-pict{font-size:14px;line-height:1;margin-right:2px;}
+/* アレルゲンカードの区分凡例 */
+.allergen-group-label{font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 0 2px;color:var(--text-muted);display:flex;align-items:center;gap:4px;margin-top:4px;}
+.allergen-group-label.big8-lbl::before{content:'';width:10px;height:10px;border-radius:2px;background:var(--chibo-red);flex-shrink:0;}
+.allergen-group-label.twenty-lbl::before{content:'';width:10px;height:10px;border-radius:2px;background:var(--blue20);flex-shrink:0;}
+
+main{flex:1;min-width:0;display:flex;flex-direction:column;height:calc(100vh - var(--header-h));overflow:hidden;}
+
+.customer-banner{
+  flex-shrink:0;
+  background:linear-gradient(135deg,#FFF9F0,#FFF3E0);
+  border-bottom:2px solid var(--chibo-gold);
+  padding:12px 20px;display:flex;align-items:flex-start;gap:12px;
+}
+.banner-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.banner-text h3{font-size:13px;font-weight:700;color:var(--chibo-dark);margin-bottom:2px;}
+.banner-text p{font-size:12px;color:var(--chibo-ink2);line-height:1.6;}
+
+.toolbar{
+  flex-shrink:0;padding:11px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--border);background:#fff;
+}
+.result-info{font-size:13px;color:var(--text-sub);}
+.result-info strong{color:var(--text);font-weight:700;}
+.filter-tag{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--amber-l);border:1px solid var(--amber);
+  color:var(--amber);font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:10px;margin-left:6px;
+}
+.view-toggle{display:flex;gap:3px;background:var(--washi2);padding:3px;border-radius:7px;border:1px solid var(--border);}
+.view-btn{
+  padding:5px 12px;border-radius:5px;border:none;
+  background:transparent;color:var(--text-muted);
+  cursor:pointer;font-size:12px;font-family:inherit;
+  transition:all var(--tr);white-space:nowrap;
+}
+.view-btn.active{background:#fff;color:var(--chibo-red);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.1);}
+
+.table-container{flex:1;overflow:auto;position:relative;}
+table{border-collapse:collapse;font-size:12px;width:max-content;min-width:100%;}
+thead th{
+  position:sticky;top:0;z-index:30;
+  background:linear-gradient(180deg,var(--chibo-dark),var(--chibo-red));
+  color:#fff;font-weight:700;font-size:11px;
+  padding:8px 6px;text-align:center;white-space:nowrap;
+  border-right:1px solid rgba(255,255,255,.1);
+  border-bottom:2px solid var(--chibo-gold);
+  letter-spacing:.5px;line-height:1.4;
+}
+thead th:first-child{text-align:left;padding-left:16px;width:90px;min-width:90px;position:sticky;top:0;left:0;z-index:50;background:var(--chibo-dark);border-right:1px solid rgba(255,255,255,.15);}
+thead th:nth-child(2){text-align:left;min-width:210px;position:sticky;top:0;left:90px;z-index:50;background:var(--chibo-dark);border-right:2px solid var(--chibo-gold);}
+thead th.th-sel{background:var(--amber);color:var(--chibo-ink);font-weight:900;}
+tbody tr{border-bottom:1px solid var(--border);transition:background var(--tr);}
+tbody tr:hover{background:#FFF8F0;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:nth-child(even){background:var(--washi);}
+tbody tr:nth-child(even):hover{background:#FFF8F0;}
+td{padding:9px 10px;text-align:center;vertical-align:middle;white-space:nowrap;border-right:1px solid var(--border);}
+td:last-child{border-right:none;}
+td:first-child{position:sticky;left:0;z-index:10;background:var(--washi2);font-size:11px;font-weight:700;color:var(--text-muted);padding-left:16px;border-right:1px solid var(--border);}
+tbody tr:hover td:first-child{background:#FFF8F0;}
+tbody tr:nth-child(even) td:first-child{background:var(--washi);}
+tbody tr:nth-child(even):hover td:first-child{background:#FFF8F0;}
+td:nth-child(2){position:sticky;left:90px;z-index:10;background:#fff;text-align:left;font-weight:500;color:var(--text);padding-right:16px;border-right:2px solid var(--border2);}
+tbody tr:hover td:nth-child(2){background:#FFF8F0;}
+tbody tr:nth-child(even) td:nth-child(2){background:var(--washi);}
+tbody tr:nth-child(even):hover td:nth-child(2){background:#FFF8F0;}
+.m-yes{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:rgba(192,57,43,.10);border:1.5px solid rgba(192,57,43,.35);border-radius:5px;color:var(--chibo-red);font-size:13px;font-weight:900;}
+.m-yes.blue20{background:var(--blue20-l);border-color:var(--blue20-m);color:var(--blue20);}
+.m-maybe{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--amber-l);border:1.5px solid var(--amber-m);border-radius:5px;color:var(--amber);font-size:12px;font-weight:700;}
+.m-maybe.blue20{background:var(--blue20-l);border-color:var(--blue20-m);color:var(--blue20);}
+td.col-sel{background:rgba(201,168,76,.08)!important;}
+td.col-sel .m-yes,td.col-sel .m-maybe{box-shadow:0 0 0 2px rgba(201,168,76,.5);}
+/* 特定8品目ヘッダー（赤）vs 20品目ヘッダー（青） */
+thead th.th-big8{background:linear-gradient(180deg,#8B0000,#C0392B)!important;border-bottom:2px solid var(--chibo-gold);}
+thead th.th-twenty{background:linear-gradient(180deg,#0D47A1,#1565C0)!important;border-bottom:2px solid rgba(21,101,192,.5);}
+thead th.th-big8.th-sel{background:var(--amber)!important;color:var(--chibo-ink);}
+thead th.th-twenty.th-sel{background:var(--amber)!important;color:var(--chibo-ink);}
+
+.card-container{flex:1;overflow-y:auto;padding:20px;display:none;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.card-cat-title{
+  grid-column:1/-1;display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;color:var(--text-sub);
+  padding:8px 0 6px;border-bottom:2px solid var(--border2);
+}
+.card-cat-title::before{content:'';width:4px;height:15px;border-radius:2px;background:var(--chibo-red);}
+.card{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:var(--radius);padding:14px;transition:all var(--tr);
+}
+.card:hover{border-color:var(--chibo-red);background:var(--washi);box-shadow:0 4px 16px rgba(139,0,0,.1);transform:translateY(-1px);}
+.card-name{font-size:14px;font-weight:700;margin-bottom:10px;line-height:1.4;color:var(--chibo-ink);}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tag-yes{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(192,57,43,.08);color:var(--chibo-red);border:1px solid rgba(192,57,43,.2);}
+.tag-yes.twenty{background:var(--blue20-l);color:var(--blue20);border-color:var(--blue20-m);}
+.tag-maybe{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(201,168,76,.06);color:var(--amber);border:1.5px solid var(--amber-m);border-style:dashed;}
+.tag-maybe.twenty{background:var(--blue20-l);color:var(--blue20);border-color:var(--blue20-m);}
+.tag-sel{box-shadow:0 0 0 2px var(--amber);}
+.tag-maybe .mark{font-size:10px;margin-right:3px;opacity:.85;}
+.tag-yes .mark{font-size:10px;margin-right:3px;}
+.no-allergen{font-size:12px;color:var(--text-muted);font-style:italic;}
+
+.empty-state{text-align:center;padding:80px 20px;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:12px;}
+.empty-state svg{opacity:.2;}
+.empty-state p{font-size:15px;}
+.empty-state small{font-size:12px;}
+
+.admin-login-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,26,.75);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.admin-login-overlay.show{display:flex;}
+.login-box{background:#fff;border-radius:14px;padding:36px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.3);border-top:4px solid var(--chibo-red);}
+.login-box h2{font-size:20px;font-weight:900;color:var(--text);margin-bottom:6px;}
+.login-box p{font-size:13px;color:var(--text-sub);margin-bottom:24px;}
+.login-field{margin-bottom:16px;}
+.login-field label{display:block;font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:6px;}
+.login-field input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border-color var(--tr);}
+.login-field input:focus{border-color:var(--chibo-red);box-shadow:0 0 0 3px var(--red-l);}
+.login-btns{display:flex;gap:8px;margin-top:20px;}
+.btn{padding:10px 20px;border-radius:8px;border:none;font-size:13px;font-family:inherit;font-weight:700;cursor:pointer;transition:all var(--tr);}
+.btn-primary{background:var(--chibo-red);color:#fff;flex:1;}
+.btn-primary:hover{background:var(--chibo-dark);}
+.btn-ghost{background:var(--washi2);color:var(--text-sub);border:1px solid var(--border);}
+.btn-ghost:hover{background:var(--washi3);}
+.login-error{color:#dc2626;font-size:12px;margin-top:8px;display:none;}
+
+.admin-panel{display:none;position:fixed;top:var(--header-h);right:0;bottom:0;width:680px;max-width:95vw;background:#fff;border-left:2px solid var(--border);z-index:300;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.15);overflow:hidden;}
+.admin-panel.show{display:flex;}
+.admin-header{background:linear-gradient(135deg,#3D2B1F,#5C3A2E);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:2px solid var(--chibo-gold);}
+.admin-header h2{font-size:16px;font-weight:900;}
+.admin-header p{font-size:11px;opacity:.75;margin-top:2px;}
+.admin-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background var(--tr);}
+.admin-close:hover{background:rgba(255,255,255,.3);}
+
+.admin-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--washi);}
+.admin-tab{padding:11px 16px;font-size:12px;font-weight:600;color:var(--text-sub);cursor:pointer;border-bottom:2px solid transparent;transition:all var(--tr);border:none;background:none;font-family:inherit;}
+.admin-tab:hover{color:var(--text);}
+.admin-tab.active{color:var(--chibo-red);border-bottom:2px solid var(--chibo-red);}
+
+.admin-body{flex:1;overflow-y:auto;padding:20px;}
+.admin-section-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.admin-section-title::before{content:'';width:4px;height:16px;border-radius:2px;background:var(--chibo-red);}
+
+.admin-cat-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.admin-cat-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--washi2);border:1px solid var(--border);border-radius:8px;}
+.admin-cat-row input{flex:1;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:13px;font-family:inherit;outline:none;transition:border-color var(--tr);background:#fff;}
+.admin-cat-row input:focus{border-color:var(--chibo-red);}
+.icon-btn{width:30px;height:30px;border:none;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all var(--tr);flex-shrink:0;}
+.icon-btn.del{background:rgba(220,38,38,.08);color:#dc2626;}
+.icon-btn.del:hover{background:rgba(220,38,38,.18);}
+.icon-btn.up,.icon-btn.dn{background:var(--washi3);color:var(--text-sub);}
+.icon-btn.up:hover,.icon-btn.dn:hover{background:var(--border);}
+
+.add-row-btn{display:flex;align-items:center;gap:6px;padding:9px 14px;border:1.5px dashed var(--border2);border-radius:8px;background:none;color:var(--text-muted);font-size:13px;font-family:inherit;cursor:pointer;transition:all var(--tr);width:100%;}
+.add-row-btn:hover{border-color:var(--chibo-red);color:var(--chibo-red);background:var(--red-l);}
+
+.admin-item-list{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.admin-item-row{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 8px;background:var(--washi2);border:1px solid var(--border);border-radius:10px;transition:all var(--tr);}
+.admin-item-row:hover{border-color:var(--chibo-red);background:var(--red-l);}
+
+.item-thumb{
+  width:56px;height:56px;flex-shrink:0;border-radius:8px;
+  overflow:hidden;background:var(--washi3);
+  border:1.5px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;cursor:pointer;transition:all var(--tr);
+}
+.item-thumb:hover{border-color:var(--chibo-red);transform:scale(1.04);}
+.item-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.item-thumb .thumb-ph{font-size:22px;line-height:1;}
+.item-thumb .thumb-add{
+  position:absolute;inset:0;
+  background:rgba(192,57,43,.0);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;opacity:0;transition:all var(--tr);
+}
+.item-thumb:hover .thumb-add{opacity:1;background:rgba(192,57,43,.18);}
+.item-thumb.has-photo .thumb-add{font-size:14px;}
+
+.admin-item-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;cursor:pointer;}
+.admin-item-name{font-size:13px;font-weight:600;color:var(--chibo-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.admin-item-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.mini-tag{font-size:10px;padding:1px 6px;border-radius:4px;font-weight:600;}
+.mini-tag.yes{background:rgba(192,57,43,.10);color:var(--chibo-red);}
+.mini-tag.maybe{background:var(--amber-l);color:var(--amber);}
+.photo-status{font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:3px;}
+.photo-status.has{color:var(--green);font-weight:600;}
+
+.item-editor-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,26,.65);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(2px);}
+.item-editor-overlay.show{display:flex;}
+.item-editor{background:#fff;border-radius:14px;width:580px;max-width:95vw;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;border-top:4px solid var(--chibo-red);}
+.item-editor-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.item-editor-header h3{font-size:16px;font-weight:900;color:var(--chibo-dark);}
+.item-editor-header p{font-size:12px;color:var(--text-sub);margin-top:3px;}
+.item-editor-body{padding:20px 24px;overflow-y:auto;flex:1;}
+.field-row{margin-bottom:18px;}
+.field-row label{display:block;font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:6px;}
+.field-row input,.field-row select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;transition:border-color var(--tr);background:#fff;}
+.field-row input:focus,.field-row select:focus{border-color:var(--chibo-red);box-shadow:0 0 0 3px var(--red-l);}
+
+.allergen-editor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px;}
+.allergen-editor-item{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;transition:all var(--tr);user-select:none;background:var(--washi);}
+.allergen-editor-item:hover{border-color:var(--chibo-red);background:var(--red-l);}
+.allergen-editor-item.has-yes{border-color:var(--chibo-red);background:rgba(192,57,43,.07);}
+.allergen-editor-item.has-maybe{border-color:var(--amber);background:var(--amber-l);}
+.allergen-editor-name{font-size:12px;font-weight:500;}
+.allergen-cycle-btn{font-size:14px;font-weight:900;width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;background:var(--washi2);}
+.allergen-editor-item.has-yes .allergen-cycle-btn{background:rgba(192,57,43,.15);color:var(--chibo-red);}
+.allergen-editor-item.has-maybe .allergen-cycle-btn{background:var(--amber-l);color:var(--amber);}
+
+.item-editor-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;background:var(--washi);}
+.btn-danger{background:rgba(220,38,38,.08);color:#dc2626;border:1px solid rgba(220,38,38,.2);}
+.btn-danger:hover{background:rgba(220,38,38,.15);}
+.btn-admin{background:var(--chibo-red);color:#fff;}
+.btn-admin:hover{background:var(--chibo-dark);}
+
+.allergen-master-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.allergen-master-chip{display:flex;align-items:center;gap:5px;padding:5px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--washi2);font-size:12px;font-weight:500;}
+.allergen-master-chip .rm{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;line-height:1;padding:0 2px;}
+.allergen-master-chip .rm:hover{color:#dc2626;}
+
+.save-banner{display:none;position:fixed;bottom:24px;right:24px;z-index:700;background:var(--chibo-ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.3);align-items:center;gap:10px;border-left:4px solid var(--chibo-gold);}
+.save-banner.show{display:flex;}
+.save-btn-main{background:var(--chibo-gold);color:var(--chibo-ink);border:none;padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+.save-btn-main:hover{background:#B8960A;}
+
+.cat-group{margin-bottom:4px;}
+.cat-group-header{
+  display:flex;align-items:center;gap:7px;
+  width:100%;padding:8px 10px;border-radius:6px;border:none;
+  background:transparent;color:var(--text-sub);
+  font-size:13px;font-family:inherit;cursor:pointer;
+  transition:all var(--tr);text-align:left;
+  font-weight:700;
+}
+.cat-group-header:hover{background:var(--washi3);color:var(--text);}
+.cat-group-header.open{color:var(--chibo-red);}
+.cat-group-arrow{font-size:10px;margin-left:auto;transition:transform var(--tr);flex-shrink:0;opacity:.6;}
+.cat-group-header.open .cat-group-arrow{transform:rotate(90deg);}
+.cat-group-children{padding-left:14px;overflow:hidden;max-height:0;transition:max-height .25s ease;}
+.cat-group-children.open{max-height:500px;}
+.cat-group-badge{font-size:10px;background:var(--red-m);color:var(--chibo-red);border-radius:3px;padding:1px 5px;font-weight:700;}
+
+.item-modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(26,26,26,.72);z-index:700;
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(5px);padding:16px;
+}
+.item-modal-overlay.show{display:flex;}
+.item-modal{
+  background:#fff;border-radius:18px;
+  width:480px;max-width:100%;max-height:90vh;
+  display:flex;flex-direction:column;
+  box-shadow:0 24px 64px rgba(0,0,0,.32);
+  overflow:hidden;
+  border-top:4px solid var(--chibo-red);
+  animation:modalIn .22s cubic-bezier(.34,1.3,.64,1);
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.93) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+.item-modal-photo{
+  width:100%;height:220px;flex-shrink:0;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--washi2),var(--washi3));
+}
+.item-modal-photo img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:opacity .3s;
+}
+.item-modal-photo img.loading{opacity:0;}
+.item-modal-photo img.loaded{opacity:1;}
+.photo-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;
+  background:linear-gradient(135deg,#FDF0E8,#F5E6D3);
+}
+.photo-placeholder .ph-emoji{font-size:64px;line-height:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,.12));}
+.photo-placeholder .ph-label{font-size:12px;color:var(--text-muted);font-weight:500;}
+.photo-admin-btn{
+  position:absolute;bottom:10px;right:10px;
+  background:rgba(26,26,26,.65);color:#fff;
+  border:none;border-radius:6px;font-size:11px;font-family:inherit;
+  padding:5px 10px;cursor:pointer;backdrop-filter:blur(4px);
+  transition:background var(--tr);display:none;
+}
+.photo-admin-btn:hover{background:rgba(26,26,26,.9);}
+.admin-mode .photo-admin-btn{display:block;}
+.modal-cat-badge{
+  position:absolute;top:12px;left:12px;
+  background:rgba(26,26,26,.6);color:#fff;
+  font-size:11px;font-weight:700;padding:3px 10px;
+  border-radius:10px;backdrop-filter:blur(4px);letter-spacing:.5px;
+}
+
+.item-modal-body{
+  padding:20px 22px 22px;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.item-modal-name{
+  font-size:20px;font-weight:900;color:var(--chibo-dark);
+  margin-bottom:16px;line-height:1.3;
+  font-family:"Shippori Mincho",serif;letter-spacing:.5px;
+}
+
+.allergen-card{
+  background:linear-gradient(135deg,var(--washi),var(--washi2));
+  border:1.5px solid var(--border2);border-radius:12px;
+  padding:14px 16px;margin-bottom:14px;
+}
+.allergen-card-title{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  color:var(--text-muted);text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:6px;
+}
+.allergen-card-title::before{content:'';width:3px;height:12px;border-radius:2px;background:var(--chibo-red);}
+.allergen-chips-row{display:flex;flex-wrap:wrap;gap:6px;}
+
+.al-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:6px;
+  font-size:12px;font-weight:700;
+  border:1.5px solid;
+}
+.al-badge.yes{
+  background:rgba(192,57,43,.08);
+  border-color:rgba(192,57,43,.35);
+  color:var(--chibo-red);
+}
+.al-badge.maybe{
+  background:var(--amber-l);
+  border-color:var(--amber-m);
+  color:var(--amber);
+}
+/* 20品目（推奨）の色 - 青 */
+.al-badge.yes.twenty{
+  background:var(--blue20-l);
+  border-color:var(--blue20-m);
+  color:var(--blue20);
+}
+.al-badge.maybe.twenty{
+  background:var(--blue20-l);
+  border-color:var(--blue20-m);
+  color:var(--blue20);
+  border-style:dashed;
+}
+.al-badge.big8-mark::after{
+  content:'特定8';font-size:8px;font-weight:900;
+  background:var(--chibo-red);color:#fff;
+  border-radius:2px;padding:0 3px;margin-left:2px;
+  vertical-align:middle;
+}
+.al-badge.twenty-mark::after{
+  content:'推奨20';font-size:8px;font-weight:900;
+  background:var(--blue20);color:#fff;
+  border-radius:2px;padding:0 3px;margin-left:2px;
+  vertical-align:middle;
+}
+.al-badge.maybe.big8-mark::after{background:var(--amber);}
+.al-none{font-size:13px;color:var(--text-muted);font-style:italic;padding:4px 0;}
+
+.safe-banner{
+  background:linear-gradient(135deg,#F0FDF4,#DCFCE7);
+  border:1.5px solid rgba(45,122,79,.25);
+  border-radius:10px;padding:12px 16px;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:700;color:var(--green);
+}
+
+.warn-banner{
+  background:linear-gradient(135deg,#FFF7ED,#FFEDD5);
+  border:1.5px solid rgba(184,134,11,.3);
+  border-radius:10px;padding:12px 16px;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:700;color:var(--amber);
+}
+
+.item-modal-close{
+  position:absolute;top:12px;right:12px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(26,26,26,.5);border:none;
+  color:#fff;font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);transition:background var(--tr);z-index:10;
+}
+.item-modal-close:hover{background:rgba(26,26,26,.8);}
+
+td.item-link{cursor:pointer;color:var(--chibo-red);font-weight:600;transition:color var(--tr);}
+td.item-link:hover{color:var(--chibo-dark);text-decoration:underline;}
+td.item-link:hover + td, td.item-link:hover{background:#FFF3F3!important;}
+
+.card{cursor:pointer;}
+
+.photo-edit-box{
+  background:#fff;border-radius:16px;padding:28px;
+  width:480px;max-width:95vw;
+  box-shadow:0 24px 64px rgba(0,0,0,.32);
+  border-top:4px solid var(--chibo-gold);
+  max-height:90vh;overflow-y:auto;
+}
+.photo-edit-box h3{font-size:17px;font-weight:900;margin-bottom:4px;color:var(--chibo-dark);}
+.photo-edit-box .sub{font-size:12px;color:var(--text-sub);margin-bottom:20px;line-height:1.6;}
+
+.drop-zone{
+  width:100%;border:2.5px dashed var(--border2);border-radius:12px;
+  background:var(--washi2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:28px 20px;cursor:pointer;
+  transition:all .2s;position:relative;margin-bottom:14px;
+  min-height:180px;
+}
+.drop-zone:hover,.drop-zone.drag-over{
+  border-color:var(--chibo-red);background:var(--red-l);
+}
+.drop-zone.has-image{padding:0;border-style:solid;border-color:var(--chibo-gold);}
+.drop-zone-icon{font-size:38px;line-height:1;transition:transform .2s;}
+.drop-zone:hover .drop-zone-icon,.drop-zone.drag-over .drop-zone-icon{transform:scale(1.12);}
+.drop-zone-label{font-size:13px;font-weight:700;color:var(--text-sub);}
+.drop-zone-hint{font-size:11px;color:var(--text-muted);text-align:center;line-height:1.7;}
+.drop-zone-hint kbd{
+  background:var(--washi3);border:1px solid var(--border2);
+  border-radius:4px;padding:1px 5px;font-size:10px;font-family:inherit;
+}
+.drop-zone input[type=file]{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:0;cursor:pointer;
+}
+
+.drop-zone-preview{
+  width:100%;height:200px;object-fit:cover;
+  border-radius:10px;display:block;
+}
+
+.dz-clear-btn{
+  position:absolute;top:8px;right:8px;
+  background:rgba(26,26,26,.65);color:#fff;
+  border:none;border-radius:6px;font-size:11px;font-family:inherit;
+  padding:4px 10px;cursor:pointer;backdrop-filter:blur(4px);
+  transition:background .15s;
+}
+.dz-clear-btn:hover{background:rgba(192,57,43,.9);}
+
+.paste-hint{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,.08);border:1px solid var(--chibo-gold-m);
+  border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text-sub);
+  margin-bottom:16px;
+}
+.paste-hint strong{color:var(--chibo-dark);}
+
+.url-toggle{
+  font-size:12px;color:var(--text-muted);cursor:pointer;
+  text-decoration:underline;margin-bottom:8px;display:inline-block;
+}
+.url-toggle:hover{color:var(--chibo-red);}
+.url-row{display:none;margin-bottom:14px;}
+.url-row.open{display:flex;gap:8px;}
+.url-row input{
+  flex:1;padding:8px 12px;border:1.5px solid var(--border);
+  border-radius:7px;font-size:13px;font-family:inherit;outline:none;
+  transition:border-color .15s;background:#fff;
+}
+.url-row input:focus{border-color:var(--chibo-red);}
+.url-row button{
+  padding:8px 14px;background:var(--washi2);border:1.5px solid var(--border);
+  border-radius:7px;font-size:12px;font-family:inherit;cursor:pointer;white-space:nowrap;
+  font-weight:600;color:var(--text-sub);
+}
+.url-row button:hover{border-color:var(--chibo-red);color:var(--chibo-red);}
+
+.compress-info{font-size:11px;color:var(--text-muted);margin-bottom:8px;min-height:16px;}
+
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted);}
+.fade-in{animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+  .app{flex-direction:column;height:auto;overflow:visible;}
+  aside{width:100%;height:auto;border-right:none;border-bottom:2px solid var(--border2);}
+  main{height:auto;overflow:visible;}
+  .table-container{height:60vh;}
+  .legend-pill{display:none;}
+  .admin-panel{width:100%;}
+}
+
+.lang-selector{position:relative;}
+.lang-current{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:7px;
+  color:#fff;font-family:inherit;font-size:12px;font-weight:700;
+  padding:5px 10px;cursor:pointer;
+  transition:background .15s;white-space:nowrap;
+}
+.lang-current:hover{background:rgba(255,255,255,.22);}
+.lang-arrow{font-size:9px;opacity:.7;transition:transform .15s;}
+.lang-selector.open .lang-arrow{transform:rotate(180deg);}
+.lang-dropdown{
+  display:none;position:absolute;top:calc(100% + 6px);right:0;
+  background:#fff;border-radius:10px;
+  box-shadow:0 8px 32px rgba(0,0,0,.22);
+  border:1px solid var(--border);
+  overflow:hidden;min-width:140px;z-index:500;
+  animation:dropIn .15s ease;
+}
+@keyframes dropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.lang-selector.open .lang-dropdown{display:block;}
+.lang-dropdown button{
+  display:block;width:100%;text-align:left;
+  background:none;border:none;
+  padding:10px 16px;font-size:13px;font-family:inherit;
+  font-weight:600;cursor:pointer;color:var(--chibo-dark);
+  transition:background .12s;white-space:nowrap;
+}
+.lang-dropdown button:hover{background:var(--red-l);color:var(--chibo-red);}
+.lang-dropdown button.active{
+  background:var(--red-l);color:var(--chibo-red);
+  border-left:3px solid var(--chibo-red);
+}
+
+
+
+
+
+ 
+.print-container{
+  flex:1;overflow-y:auto;padding:20px;display:none;
+  background:#e8e4dc;
+}
+.print-preview-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;gap:16px;flex-wrap:wrap;
+}
+.print-preview-header h2{font-size:15px;font-weight:700;color:var(--chibo-dark);}
+.print-preview-note{font-size:11px;color:var(--text-muted);margin-top:3px;}
+.btn-print-exec{
+  display:flex;align-items:center;gap:6px;
+  background:var(--chibo-red);color:#fff;border:none;
+  padding:9px 20px;border-radius:8px;font-size:13px;
+  font-family:inherit;font-weight:700;cursor:pointer;
+  transition:background var(--tr);white-space:nowrap;
+}
+.btn-print-exec:hover{background:var(--chibo-dark);}
+
+ 
+.print-page{
+  width:210mm;
+  min-height:297mm;
+  max-height:297mm;
+  background:#fff;
+  margin:0 auto 16px;
+  padding:7mm 8mm 6mm;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+  box-sizing:border-box;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.print-page-header{
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:2px solid var(--chibo-red);
+  padding-bottom:3px;margin-bottom:5px;flex-shrink:0;
+}
+.print-page-logo{
+  font-size:11px;font-weight:900;color:var(--chibo-dark);
+  font-family:"Shippori Mincho",serif;letter-spacing:1px;
+}
+.print-page-logo span{
+  font-size:9px;color:var(--text-muted);
+  font-family:sans-serif;font-weight:400;margin-left:6px;
+}
+.print-page-num{font-size:9px;color:var(--text-muted);}
+
+ 
+.print-cat-header{
+  grid-column:1/-1;
+  background:linear-gradient(135deg,var(--chibo-dark),var(--chibo-red));
+  color:#fff;font-size:9.5px;font-weight:900;
+  padding:3px 8px;border-radius:4px;
+  letter-spacing:.8px;margin-top:4px;margin-bottom:2px;
+  display:flex;align-items:center;gap:6px;
+}
+.print-cat-header::before{
+  content:'';width:3px;height:10px;
+  background:var(--chibo-gold);border-radius:2px;
+}
+
+ 
+.print-cards-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:3mm;
+  flex:1;
+  align-content:start;
+}
+
+ 
+.print-card{
+  border:1px solid #d4c9b8;
+  border-radius:4px;
+  overflow:hidden;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  break-inside:avoid;
+  min-height:18mm;
+}
+.print-card-body{
+  padding:2.5mm 3mm;
+  flex:1;
+  display:flex;flex-direction:column;gap:2mm;
+}
+.print-card-name{
+  font-size:8px;font-weight:700;
+  color:var(--chibo-dark);line-height:1.3;
+  border-bottom:1px solid #e8e0d4;
+  padding-bottom:1.5mm;margin-bottom:1mm;
+}
+.print-allergen-row{
+  display:flex;flex-wrap:wrap;gap:1.5mm;
+}
+.print-al-yes{
+  font-size:7px;font-weight:700;
+  padding:1px 4px;border-radius:3px;
+  background:rgba(192,57,43,.10);
+  color:var(--chibo-red);
+  border:1px solid rgba(192,57,43,.3);
+  white-space:nowrap;
+}
+.print-al-maybe{
+  font-size:7px;font-weight:700;
+  padding:1px 4px;border-radius:3px;
+  background:rgba(201,168,76,.08);
+  color:var(--amber);
+  border:1px dashed var(--amber-m);
+  white-space:nowrap;
+}
+.print-no-al{
+  font-size:7px;color:var(--text-muted);font-style:italic;
+}
+.print-page-footer{
+  flex-shrink:0;margin-top:3mm;
+  border-top:1px solid var(--border);
+  padding-top:2mm;
+  display:flex;gap:10mm;font-size:7.5px;color:var(--text-muted);
+  align-items:center;
+}
+.print-page-footer span{display:flex;align-items:center;gap:3px;}
+
+ 
+@media print{
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  body > *:not(#app-root){display:none;}
+  .print-container{
+    display:block !important;
+    padding:0;overflow:visible;
+    background:none;
+  }
+  .print-preview-header{display:none !important;}
+  .print-page{
+    box-shadow:none;margin:0;
+    page-break-after:always;
+    break-after:page;
+    width:210mm;height:297mm;
+    padding:7mm 8mm 6mm;
+  }
+}
+
+
+/* ── 追加スタイル（GAS版） ── */
+.header-right{display:flex;align-items:center;gap:10px;}
+.data-warning{flex-shrink:0;background:#FFF3CD;border-bottom:2px solid #E0A800;color:#5C4400;font-size:13px;font-weight:700;padding:10px 20px;line-height:1.6;}
+.load-error{padding:60px 20px;text-align:center;color:var(--chibo-dark);font-weight:700;line-height:1.8;}
+@media (max-width:820px){
+  :root{--header-h:0px;}
+  header{position:static;height:auto;padding:8px 12px;flex-wrap:wrap;gap:8px;}
+  .logo-text{font-size:17px;}
+  .header-right{width:100%;justify-content:space-between;flex-wrap:wrap;}
+  .legend-pill{display:none;}
+  .app{flex-direction:column !important;height:auto !important;overflow:visible !important;padding-top:0;}
+  aside{width:100% !important;min-width:0 !important;max-width:none !important;height:auto !important;border-right:none;border-bottom:2px solid var(--border2);}
+  .sb-filter-section .allergen-grid{max-height:190px;}
+  .sb-cat-section{max-height:210px;flex:none;}
+  main{height:auto !important;overflow:visible;}
+  .table-container{overflow:auto;}
+  .customer-banner{padding:10px 12px;}
+  .toolbar{padding:10px 12px;flex-wrap:wrap;}
+  .card-container{padding:12px;}
+  .data-warning{padding:10px 12px;}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🍳</div>
+    <div class="logo-main">
+      <span class="logo-text">千 房</span>
+      <span class="logo-sub" id="logo-sub-text">CHIBO フードピクト</span>
+    </div>
+    <span class="logo-year">2026</span>
+  </div>
+  <div class="header-right">
+    <div class="store-selector-pill" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 12px;">
+      <span style="font-size:12px;">📍</span>
+      <select id="store-select" onchange="onStoreChange()" style="background:transparent;border:none;color:#fff;font-size:12px;font-family:inherit;max-width:180px;">
+        <option value="" id="store-default-opt" style="color:#1A1A1A;background:#fff;">グランドメニューのみ</option>
+      </select>
+      <span id="store-loading" style="display:none;font-size:11px;color:#fff;opacity:.85;">読込中…</span>
+    </div>
+    <div class="legend-pill">
+      <span class="lp"><span class="m-yes">●</span> <span id="legend-contains">含む</span></span>
+      <span style="opacity:.4">|</span>
+      <span class="lp"><span class="m-maybe">▲</span> <span id="legend-maybe">可能性あり</span></span>
+      <span style="opacity:.4">|</span>
+      <span class="lp" style="color:rgba(255,255,255,.9);font-size:11px"><span style="display:inline-block;width:10px;height:10px;background:#C0392B;border-radius:2px;margin-right:3px;vertical-align:middle"></span><span id="legend-man">義務</span></span>
+      <span class="lp" style="color:rgba(255,255,255,.9);font-size:11px"><span style="display:inline-block;width:10px;height:10px;background:#1565C0;border-radius:2px;margin-right:3px;vertical-align:middle"></span><span id="legend-rec">推奨</span></span>
+    </div>
+    <div class="lang-selector" id="lang-selector">
+      <button class="lang-current" id="lang-current-btn" onclick="toggleLangMenu(event)">
+        <span id="lang-current-flag">🇯🇵</span>
+        <span id="lang-current-label">日本語</span>
+        <span class="lang-arrow">▾</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <button onclick="setLang('ja')" id="lang-ja" class="active">🇯🇵 日本語</button>
+        <button onclick="setLang('en')" id="lang-en">🇺🇸 English</button>
+        <button onclick="setLang('zh')" id="lang-zh">🇨🇳 中文</button>
+        <button onclick="setLang('ko')" id="lang-ko">🇰🇷 한국어</button>
+        <button onclick="setLang('my')" id="lang-my">🇲🇲 မြန်မာ</button>
+        <button onclick="setLang('si')" id="lang-si">🇱🇰 සිංහල</button>
+        <button onclick="setLang('ne')" id="lang-ne">🇳🇵 नेपाली</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="app">
+  <aside>
+    <div class="sb-filter-section">
+      <div class="sb-label" id="sb-label-allergen">アレルギーで絞り込む</div>
+      <div class="allergen-tab-bar">
+        <button class="allergen-tab-btn active-tab" data-atab="man" onclick="switchAllergenTab('man')" id="atab-man"><span id="atab-man-txt">特定原材料</span><span class="tab-badge" id="atab-man-badge">義務</span></button>
+        <button class="allergen-tab-btn" data-atab="rec" onclick="switchAllergenTab('rec')" id="atab-rec"><span id="atab-rec-txt">推奨品目</span><span class="tab-badge" id="atab-rec-badge">推奨</span></button>
+        <button class="allergen-tab-btn" data-atab="all" onclick="switchAllergenTab('all')" id="atab-all">全て</button>
+      </div>
+      <div class="filter-mode">
+        <button class="mode-btn active" id="mode-exclude" onclick="setMode('exclude')">含まない商品を表示</button>
+        <button class="mode-btn" id="mode-include" onclick="setMode('include')">含む商品を表示</button>
+      </div>
+      <div class="allergen-grid" id="allergen-chips"></div>
+    </div>
+    <div class="sb-search-section">
+      <div class="sb-label" id="sb-label-search">商品を検索</div>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        <input type="text" id="search" placeholder="商品名を入力..." autocomplete="off">
+      </div>
+    </div>
+    <div class="sb-cat-section">
+      <div class="sb-label" id="sb-label-cat">カテゴリ</div>
+      <div id="cat-list"></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="customer-banner" id="customer-banner">
+      <div class="banner-icon">🌿</div>
+      <div class="banner-text">
+        <h3 id="banner-title">アレルギーをお持ちのお客様へ</h3>
+        <p id="banner-desc">左のパネルからアレルギー品目をお選びください。安心してお召し上がりいただける商品を絞り込めます。「▲」は製造工程での混入可能性がある品目です。</p>
+      </div>
+    </div>
+    <div class="data-warning" id="data-warning" style="display:none"></div>
+    <div class="toolbar">
+      <div class="result-info" id="result-info"><span id="result-loading">読込中…</span></div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="btn-table" onclick="setView('table')"><span id="view-btn-table">📋 一覧表</span></button>
+        <button class="view-btn" id="btn-card" onclick="setView('card')"><span id="view-btn-card">🃏 カード</span></button>
+        <button class="view-btn" id="btn-print" onclick="setView('print')"><span id="view-btn-print">🖨️ 印刷</span></button>
+      </div>
+    </div>
+    <div class="table-container" id="table-container"><div id="table-view"></div></div>
+    <div class="card-container" id="card-container" style="display:none;"><div id="card-view"></div></div>
+    <div class="print-container" id="print-container" style="display:none;"></div>
+  </main>
+</div>
+
+<div class="item-modal-overlay" id="item-modal-overlay" onclick="handleModalOverlayClick(event)">
+  <div class="item-modal" id="item-modal">
+    <div class="item-modal-photo" id="modal-photo-area">
+      <button class="item-modal-close" onclick="closeItemModal()">✕</button>
+      <span class="modal-cat-badge" id="modal-cat-badge"></span>
+    </div>
+    <div class="item-modal-body">
+      <div class="item-modal-name" id="modal-item-name"></div>
+      <div id="modal-alert-banner"></div>
+      <div class="allergen-card">
+        <div class="allergen-card-title" id="modal-al-title">アレルゲン情報</div>
+        <div class="allergen-chips-row" id="modal-allergen-chips"></div>
+      </div>
+      <p id="modal-footer-note" style="font-size:10px;color:var(--text-muted);line-height:1.7;margin-top:4px">
+        ●含む　▲製造工程での混入可能性あり<br>
+        ※アレルギーをお持ちのお客様はスタッフにお申し付けください。
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   設定
+   ・GAS_MENU_URL : GASをWebアプリとしてデプロイしたURL（…/exec）に差し替えてください
+   ・FALLBACK_URL : GASに繋がらない時に表示する保存済みデータ（要・定期更新）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const GAS_MENU_URL = 'https://script.google.com/macros/s/AKfycbyU4_7j6kcoyL-bvxo3PQthR_pb8AZz4p07B0qYPo5RBGGNKiFzRItGpOMrajhNZG7ELQ/exec';
+const FALLBACK_URL = 'fallback.json';
+const LOAD_TIMEOUT_MS = 15000;
+const STORE_MENU_API_BASE = 'https://script.google.com/macros/s/AKfycbwkwjqOOD1t4mSakE9qKbYyZlTGdP7gCNNc74tgZn1rIUMVQB6z2rXsb3vv01Yse-F0/exec';
+
+const LANG_META = {
+  ja:['🇯🇵','日本語'], en:['🇺🇸','English'], zh:['🇨🇳','中文'], ko:['🇰🇷','한국어'],
+  my:['🇲🇲','မြန်မာ'], si:['🇱🇰','සිංහල'], ne:['🇳🇵','नेपाली']
+};
+const CAT_PALETTE = ["#C0392B","#8B4513","#D4880A","#5C7A3A","#2E6B8A","#6B3A8A","#A0522D","#2D6B5C","#8A6B2E","#5C2E6B","#3A6B8A","#6B8A3A"];
+
+/* ── 状態 ── */
+let TRANSLATIONS = {};
+let currentLang = 'ja';
+let appData = { allergens: [], categories: [] };
+let allergenMeta = {};               // 品目名 -> {group:'義務'|'推奨'|'その他', pict}
+let allItems = [];
+let dataIsFallback = false;
+let dataLoaded = false;
+let activeCat = null, selectedAllergens = new Set(), filterMode = 'exclude', currentView = 'table', searchQuery = '';
+let currentAllergenTab = 'man';
+let activeStoreOnly = false;
+let currentStoreDynamicCategories = [];
+const openGroups = {};               // グループ名 -> 開閉（未設定は開）
+
+/* ── ユーティリティ ── */
+function h(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function normQ(s){
+  return String(s || '').normalize('NFKC').toLowerCase()
+    .replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60))
+    .replace(/\s+/g, '');
+}
+function $(id){ return document.getElementById(id); }
+function _setText(id, text){ const el = $(id); if (el) el.textContent = text; }
+
+/* ── 多言語（該当言語 → 英語 → 日本語の順で代替） ── */
+function lookup(section, key){
+  if (currentLang === 'ja') return null;
+  const get = lang => { const tr = TRANSLATIONS[lang]; return tr && tr[section] && tr[section][key]; };
+  return get(currentLang) || get('en') || null;
+}
+function t(key){ return lookup('ui', key) || key; }
+function tItem(n){ return lookup('items', n) || n; }
+function tAllergen(n){ return lookup('allergens', n) || n; }
+function tCategory(n){ return lookup('categories', n) || n; }
+
+function setLang(code){
+  currentLang = code;
+  document.documentElement.lang = code;
+  document.querySelectorAll('.lang-dropdown button').forEach(b => b.classList.remove('active'));
+  const btn = $('lang-' + code); if (btn) btn.classList.add('active');
+  const meta = LANG_META[code];
+  if (meta){ _setText('lang-current-flag', meta[0]); _setText('lang-current-label', meta[1]); }
+  closeLangMenu();
+  _applyLangToDOM();
+  buildChips();
+  render();
+}
+function _applyLangToDOM(){
+  _setText('sb-label-allergen', t('アレルギーで絞り込む'));
+  _setText('sb-label-search', t('商品を検索'));
+  _setText('sb-label-cat', t('カテゴリ'));
+  _setText('mode-exclude', t('含まない商品を表示'));
+  _setText('mode-include', t('含む商品を表示'));
+  const s = $('search'); if (s) s.placeholder = t('商品名を入力...');
+  _setText('banner-title', t('アレルギーをお持ちのお客様へ'));
+  _setText('banner-desc', t('左のパネルからアレルギー品目をお選びください。安心してお召し上がりいただける商品を絞り込めます。「▲」は製造工程での混入可能性がある品目です。'));
+  _setText('legend-contains', t('含む'));
+  _setText('legend-maybe', t('可能性あり'));
+  _setText('legend-man', t('義務'));
+  _setText('legend-rec', t('推奨'));
+  _setText('view-btn-table', '📋 ' + t('一覧表'));
+  _setText('view-btn-card', '🃏 ' + t('カード'));
+  _setText('view-btn-print', '🖨️ ' + t('印刷'));
+  _setText('logo-sub-text', t('CHIBO フードピクト'));
+  _setText('atab-man-txt', t('特定原材料'));
+  _setText('atab-man-badge', t('義務'));
+  _setText('atab-rec-txt', t('推奨品目'));
+  _setText('atab-rec-badge', t('推奨'));
+  _setText('atab-all', t('全て'));
+  _setText('store-default-opt', t('グランドメニューのみ'));
+  _setText('store-loading', t('読込中…'));
+  _setText('modal-al-title', t('アレルゲン情報'));
+  _setText('modal-footer-note', '');
+  const fn = $('modal-footer-note');
+  if (fn) fn.innerHTML = '●' + h(t('含む')) + '　▲' + h(t('製造工程での混入可能性あり')) + '<br>※' + h(t('アレルギーをお持ちのお客様はスタッフにお申し付けください')) + '。';
+  const w = $('data-warning');
+  if (w){
+    if (dataIsFallback){ w.style.display = ''; w.textContent = '⚠️ ' + t('最新情報を取得できなかったため、保存済みのデータを表示しています。必ずスタッフにご確認ください。'); }
+    else w.style.display = 'none';
+  }
+}
+function toggleLangMenu(e){ e.stopPropagation(); $('lang-selector').classList.toggle('open'); }
+function closeLangMenu(){ const el = $('lang-selector'); if (el) el.classList.remove('open'); }
+
+/* ── アレルゲン区分 ── */
+function groupOf(a){ return (allergenMeta[a] && allergenMeta[a].group) || 'その他'; }
+function isMan(a){ return groupOf(a) === '義務'; }
+function isRec(a){ return groupOf(a) === '推奨'; }
+function pictOf(a){ return (allergenMeta[a] && allergenMeta[a].pict) || ''; }
+function getAllergensByTab(tab){
+  if (tab === 'man') return appData.allergens.filter(isMan);
+  if (tab === 'rec') return appData.allergens.filter(isRec);
+  return appData.allergens;
+}
+function switchAllergenTab(tab){
+  currentAllergenTab = tab;
+  document.querySelectorAll('.allergen-tab-btn').forEach(b => b.classList.toggle('active-tab', b.dataset.atab === tab));
+  buildChips();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   データ読み込み（GAS → 失敗時は fallback.json）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function jsonpRequest(url, timeoutMs){
+  return new Promise((resolve, reject) => {
+    const cb = '_chiboJsonp_' + Date.now() + '_' + Math.floor(Math.random() * 1e6);
+    const script = document.createElement('script');
+    let done = false;
+    const finish = () => { done = true; clearTimeout(timer); window[cb] = function(){}; script.remove(); };
+    const timer = setTimeout(() => { if (done) return; finish(); reject(new Error('timeout')); }, timeoutMs || 15000);
+    window[cb] = data => { if (done) return; finish(); resolve(data); };
+    script.onerror = () => { if (done) return; finish(); reject(new Error('network')); };
+    script.src = url + (url.indexOf('?') !== -1 ? '&' : '?') + 'callback=' + cb;
+    document.body.appendChild(script);
+  });
+}
+function validMenu(d){
+  return d && !d.error && Array.isArray(d.allergens) && Array.isArray(d.categories) && d.categories.length > 0;
+}
+function applyData(d, isFallback){
+  appData.allergens = d.allergens.map(a => a.name);
+  allergenMeta = {};
+  d.allergens.forEach(a => { allergenMeta[a.name] = { group: a.group, pict: a.pict || '' }; });
+  appData.categories = d.categories.map(c => ({
+    category: c.category, group: c.group || '', emoji: c.emoji || '',
+    items: (c.items || []).map(i => ({ name: i.name, allergens: i.allergens || {}, photo: i.photo || '' }))
+  }));
+  TRANSLATIONS = d.translations || {};
+  dataIsFallback = !!isFallback;
+  dataLoaded = true;
+  rebuildAllItems();
+  _applyLangToDOM();
+  buildChips();
+  render();
+}
+async function loadMenu(){
+  let data = null, fallback = false;
+  if (GAS_MENU_URL && GAS_MENU_URL.indexOf('PASTE_') !== 0){
+    try {
+      const d = await jsonpRequest(GAS_MENU_URL, LOAD_TIMEOUT_MS);
+      if (validMenu(d)) data = d; else console.warn('GASの応答が不正です', d && d.error);
+    } catch (e) { console.warn('GASの読み込みに失敗しました', e); }
+  }
+  if (!data){
+    try {
+      const res = await fetch(FALLBACK_URL, { cache: 'no-cache' });
+      if (res.ok){ const d = await res.json(); if (validMenu(d)){ data = d; fallback = true; } }
+    } catch (e) { console.warn('保存済みデータの読み込みに失敗しました', e); }
+  }
+  if (!data){
+    $('result-info').innerHTML = '';
+    $('table-view').innerHTML = '<div class="load-error">データを読み込めませんでした。スタッフにお申し付けください。<br>Could not load data. Please ask our staff.</div>';
+    return;
+  }
+  applyData(data, fallback);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   店舗別メニュー連携（GAS Webアプリ）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+async function loadStoreListIntoSelector(){
+  try {
+    const stores = await jsonpRequest(STORE_MENU_API_BASE + '?mode=stores', LOAD_TIMEOUT_MS);
+    const sel = $('store-select');
+    stores.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.name; opt.textContent = s.name;
+      opt.style.color = '#1A1A1A'; opt.style.background = '#fff';
+      sel.appendChild(opt);
+    });
+  } catch (e) { console.warn('店舗一覧の取得に失敗しました', e); }
+}
+function removeCurrentStoreCategories(){
+  if (!currentStoreDynamicCategories.length) return;
+  appData.categories = appData.categories.filter(c => !currentStoreDynamicCategories.includes(c.category));
+  currentStoreDynamicCategories = [];
+}
+let storeRequestSeq = 0;
+async function onStoreChange(){
+  const storeName = $('store-select').value;
+  const mySeq = ++storeRequestSeq;
+  const sel = $('store-select');
+  const loadingEl = $('store-loading');
+  sel.disabled = true;
+  loadingEl.style.display = 'inline';
+  if (storeName){
+    try {
+      const data = await jsonpRequest(STORE_MENU_API_BASE + '?mode=menu&store=' + encodeURIComponent(storeName), LOAD_TIMEOUT_MS);
+      if (mySeq !== storeRequestSeq) return;
+      removeCurrentStoreCategories();
+      const suffix = '（' + storeName + '）';
+      const storeCats = (data.categories || []).filter(c => String(c.category).indexOf(suffix) !== -1);
+      storeCats.forEach(c => {
+        appData.categories.push({
+          category: c.category, group: '', emoji: c.emoji || '',
+          items: (c.items || []).map(i => ({ name: i.name, allergens: i.allergens || {}, photo: i.photo || '' }))
+        });
+        currentStoreDynamicCategories.push(c.category);
+      });
+      activeStoreOnly = currentStoreDynamicCategories.length > 0;
+      if (!activeStoreOnly) alert(storeName + 'にはまだ公開されている店舗限定メニューがありません。');
+    } catch (e) {
+      if (mySeq !== storeRequestSeq) return;
+      console.warn('店舗メニューの読み込みに失敗しました', e);
+      alert('店舗限定メニューの読み込みに失敗しました。時間を置いてもう一度お試しください。');
+      removeCurrentStoreCategories();
+      activeStoreOnly = false;
+    }
+  } else {
+    if (mySeq !== storeRequestSeq) return;
+    removeCurrentStoreCategories();
+    activeStoreOnly = false;
+  }
+  if (mySeq !== storeRequestSeq) return;
+  sel.disabled = false;
+  loadingEl.style.display = 'none';
+  activeCat = null;
+  rebuildAllItems(); render();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   一覧・絞り込み
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function rebuildAllItems(){
+  allItems = [];
+  appData.categories.forEach((cat, ci) => cat.items.forEach((item, ii) =>
+    allItems.push({ name: item.name, allergens: item.allergens || {}, photo: item.photo, category: cat.category, _ci: ci, _ii: ii })));
+}
+
+function buildCatList(){
+  const counts = {};
+  allItems.forEach(i => counts[i.category] = (counts[i.category] || 0) + 1);
+  const cats = appData.categories.filter(c => counts[c.category]);
+  let html = `<button class="cat-btn ${!activeCat && !activeStoreOnly ? 'active' : ''}" data-cat="">
+    <span class="cat-dot" style="background:var(--chibo-red)"></span>${h(t('すべて'))}
+    <span class="cat-count">${allItems.length}</span></button>`;
+  if (activeStoreOnly && currentStoreDynamicCategories.length){
+    const n = allItems.filter(i => currentStoreDynamicCategories.includes(i.category)).length;
+    html += `<div class="cat-btn active" style="background:var(--chibo-red);color:#fff;cursor:default;">
+      <span class="cat-dot" style="background:#fff"></span>📍${h(t('店舗限定メニューのみ表示中'))}
+      <span class="cat-count" style="background:rgba(255,255,255,.25);color:#fff;">${n}</span></div>`;
+  }
+  const btn = (cat, ci, small) => `<button class="cat-btn ${activeCat === cat.category ? 'active' : ''}" data-cat="${h(cat.category)}"${small ? ' style="font-size:12px;padding:7px 8px;"' : ''}>
+      <span class="cat-dot" style="background:${CAT_PALETTE[ci % CAT_PALETTE.length]}${small ? ';width:6px;height:6px' : ''}"></span>${h(tCategory(cat.category))}
+      <span class="cat-count">${counts[cat.category] || 0}</span></button>`;
+  const doneGroups = new Set();
+  let colorIdx = 0;
+  cats.forEach(cat => {
+    if (cat.group){
+      if (doneGroups.has(cat.group)) return;
+      doneGroups.add(cat.group);
+      const members = cats.filter(c => c.group === cat.group);
+      const total = members.reduce((s, c) => s + (counts[c.category] || 0), 0);
+      const open = openGroups[cat.group] !== false || members.some(m => m.category === activeCat);
+      html += `<div class="cat-group"><button class="cat-group-header ${open ? 'open' : ''}" data-group="${h(cat.group)}">
+        <span class="cat-dot" style="background:#C0392B"></span>${h(tCategory(cat.group))}
+        <span class="cat-group-badge">${total}</span><span class="cat-group-arrow">›</span></button>
+        <div class="cat-group-children ${open ? 'open' : ''}">`;
+      members.forEach(m => { html += btn(m, colorIdx++, true); });
+      html += `</div></div>`;
+    } else {
+      html += btn(cat, colorIdx++, false);
+    }
+  });
+  $('cat-list').innerHTML = html;
+}
+
+function buildChips(){
+  const list = getAllergensByTab(currentAllergenTab);
+  const mk = (a, cls) => `<button class="a-chip ${selectedAllergens.has(a) ? 'sel' : ''} ${cls}" data-allergen="${h(a)}"><span class="a-chip-pict">${h(pictOf(a))}</span>${h(tAllergen(a))}</button>`;
+  let html = '';
+  if (currentAllergenTab === 'all'){
+    const man = list.filter(isMan), rec = list.filter(isRec), other = list.filter(a => !isMan(a) && !isRec(a));
+    if (man.length) html += `<div style="font-size:10px;font-weight:700;color:var(--chibo-red);margin:4px 0 3px;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--chibo-red);display:inline-block;flex-shrink:0"></span>${h(t('特定原材料（表示義務）'))}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">${man.map(a => mk(a, 'big8')).join('')}</div>`;
+    if (rec.length) html += `<div style="font-size:10px;font-weight:700;color:var(--blue20);margin:2px 0 3px;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--blue20);display:inline-block;flex-shrink:0"></span>${h(t('推奨品目'))}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">${rec.map(a => mk(a, 'twenty-chip')).join('')}</div>`;
+    if (other.length) html += `<div style="display:flex;flex-wrap:wrap;gap:5px">${other.map(a => mk(a, '')).join('')}</div>`;
+  } else {
+    html = list.map(a => mk(a, isMan(a) ? 'big8' : (isRec(a) ? 'twenty-chip' : ''))).join('');
+  }
+  $('allergen-chips').innerHTML = html;
+}
+
+function setMode(mode){
+  filterMode = mode;
+  $('mode-exclude').classList.toggle('active', mode === 'exclude');
+  $('mode-include').classList.toggle('active', mode === 'include');
+  render();
+}
+
+function getFiltered(){
+  const q = normQ(searchQuery);
+  return allItems.filter(item => {
+    if (activeStoreOnly){ if (!currentStoreDynamicCategories.includes(item.category)) return false; }
+    else if (activeCat && item.category !== activeCat) return false;
+    if (q && !(normQ(item.name).includes(q) || normQ(tItem(item.name)).includes(q))) return false;
+    if (selectedAllergens.size > 0){
+      const keys = Object.keys(item.allergens);
+      if (filterMode === 'exclude'){ for (const a of selectedAllergens) if (keys.includes(a)) return false; }   // ●も▲も除外（安全側）
+      else { for (const a of selectedAllergens) if (!keys.includes(a)) return false; }
+    }
+    return true;
+  });
+}
+
+function setView(v){
+  currentView = v;
+  $('btn-table').classList.toggle('active', v === 'table');
+  $('btn-card').classList.toggle('active', v === 'card');
+  $('btn-print').classList.toggle('active', v === 'print');
+  $('table-container').style.display = v === 'table' ? '' : 'none';
+  $('card-container').style.display = v === 'card' ? 'block' : 'none';
+  $('print-container').style.display = v === 'print' ? 'block' : 'none';
+  render();
+}
+
+function render(){
+  buildCatList();
+  if (!dataLoaded){ $('result-info').innerHTML = `<span>${h(t('読込中…'))}</span>`; return; }
+  const items = getFiltered();
+  const allergenDesc = selectedAllergens.size > 0 ? [...selectedAllergens].map(tAllergen).map(h).join('・') : '';
+  const desc = selectedAllergens.size > 0 ? `<span class="filter-tag">⚠️ ${allergenDesc}</span>` : '';
+  $('result-info').innerHTML = `<strong>${items.length}</strong> ${h(t('品'))}${desc}`;
+  if (currentView === 'print') renderPrint();
+  else if (currentView === 'table') renderTable(items);
+  else renderCards(items);
+}
+
+function emptyHtml(){
+  return `<div class="empty-state fade-in"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>${h(t('条件に合う商品が見つかりませんでした'))}</p>${currentLang === 'ja' ? '<small>アレルギーの選択を減らすか、カテゴリをご確認ください</small>' : ''}</div>`;
+}
+
+function renderTable(items){
+  const el = $('table-view');
+  if (!items.length){ el.innerHTML = emptyHtml(); return; }
+  const present = new Set();
+  items.forEach(i => Object.keys(i.allergens).forEach(a => present.add(a)));
+  let cols = appData.allergens.filter(a => selectedAllergens.has(a) || present.has(a));
+  [...present].forEach(a => { if (!cols.includes(a)) cols.push(a); });          // マスター外の品目も必ず表示
+  let html = `<table class="fade-in"><thead><tr><th>${h(t('カテゴリ'))}</th><th>${h(t('商品名'))}</th>`;
+  cols.forEach(a => {
+    const grp = isMan(a) ? 'th-big8' : (isRec(a) ? 'th-twenty' : '');
+    html += `<th class="${grp} ${selectedAllergens.has(a) ? 'th-sel' : ''}">${h(pictOf(a))}<br>${h(tAllergen(a))}</th>`;
+  });
+  html += `</tr></thead><tbody>`;
+  let prev = null;
+  items.forEach(item => {
+    html += `<tr><td>${item.category !== prev ? h(tCategory(item.category)) : ''}</td><td class="item-link" data-ref="${item._ci}:${item._ii}">${h(tItem(item.name))}</td>`;
+    prev = item.category;
+    cols.forEach(a => {
+      const mark = item.allergens[a], sel = selectedAllergens.has(a) ? 'col-sel' : '', b20 = isRec(a) ? 'blue20' : '';
+      html += mark === '●' ? `<td class="${sel}"><span class="m-yes ${b20}">●</span></td>`
+            : mark === '▲' ? `<td class="${sel}"><span class="m-maybe ${b20}">▲</span></td>`
+            : `<td class="${sel}"></td>`;
+    });
+    html += `</tr>`;
+  });
+  html += `</tbody></table>`;
+  el.innerHTML = html;
+}
+
+function renderCards(items){
+  const el = $('card-view');
+  if (!items.length){ el.innerHTML = emptyHtml(); return; }
+  const groups = new Map();
+  items.forEach(i => { if (!groups.has(i.category)) groups.set(i.category, []); groups.get(i.category).push(i); });
+  let html = `<div class="cards-grid fade-in">`;
+  groups.forEach((gitems, cat) => {
+    html += `<div class="card-cat-title">${h(tCategory(cat))} <span style="color:var(--text-muted);font-weight:400">${gitems.length}${h(t('品'))}</span></div>`;
+    gitems.forEach(item => {
+      const keys = Object.keys(item.allergens);
+      const tags = !keys.length
+        ? `<span class="no-allergen">${h(t('アレルゲンに該当する原材料なし'))}</span>`
+        : keys.map(a => {
+            const yes = item.allergens[a] === '●';
+            return `<span class="${yes ? 'tag-yes' : 'tag-maybe'}${isRec(a) ? ' twenty' : ''}${selectedAllergens.has(a) ? ' tag-sel' : ''}"><span class="mark">${yes ? '●' : '▲'}</span>${h(tAllergen(a))}</span>`;
+          }).join('');
+      html += `<div class="card" data-ref="${item._ci}:${item._ii}"><div class="card-name">${h(tItem(item.name))}</div><div class="card-tags">${tags}</div></div>`;
+    });
+  });
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   商品詳細モーダル
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function buildPlaceholderHTML(emoji){
+  return `<div class="photo-placeholder"><span class="ph-emoji">${h(emoji || '🍽️')}</span><span class="ph-label">${h(t('写真準備中'))}</span></div>`;
+}
+function openItemModal(ci, ii){
+  const cat = appData.categories[ci];
+  const item = cat && cat.items[ii];
+  if (!item) return;
+  $('modal-cat-badge').textContent = tCategory(cat.category);
+  const area = $('modal-photo-area');
+  const old = area.querySelector('.modal-media'); if (old) old.remove();
+  const media = document.createElement('div');
+  media.className = 'modal-media';
+  media.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+  if (item.photo){
+    const img = document.createElement('img');
+    img.alt = item.name;
+    img.className = 'loading';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    img.onload = () => { img.classList.remove('loading'); img.classList.add('loaded'); };
+    img.onerror = () => { media.innerHTML = buildPlaceholderHTML(cat.emoji); };
+    img.src = item.photo;
+    media.appendChild(img);
+  } else {
+    media.innerHTML = buildPlaceholderHTML(cat.emoji);
+  }
+  area.insertBefore(media, area.querySelector('.modal-cat-badge'));
+  $('modal-item-name').textContent = tItem(item.name);
+
+  const keys = Object.keys(item.allergens);
+  const hit = [...selectedAllergens].filter(a => keys.includes(a));
+  const alertEl = $('modal-alert-banner');
+  if (selectedAllergens.size > 0 && hit.length > 0)
+    alertEl.innerHTML = `<div class="warn-banner">⚠️ ${hit.map(a => h(tAllergen(a))).join('・')} ${h(t('選択中のアレルギーが含まれています').replace('⚠ ', '').replace('⚠️ ', ''))}</div>`;
+  else if (selectedAllergens.size > 0)
+    alertEl.innerHTML = `<div class="safe-banner">${h(t('選択中のアレルギーは含まれていません'))}</div>`;
+  else alertEl.innerHTML = '';
+
+  const chipsEl = $('modal-allergen-chips');
+  const entries = Object.entries(item.allergens);
+  if (!entries.length){
+    chipsEl.innerHTML = `<span class="al-none">${h(t('アレルゲンに該当する原材料なし'))}</span>`;
+  } else {
+    const badge = ([a, v], extra) => {
+      const mark = v === '●' ? '<span style="font-size:15px;line-height:1">●</span>' : '<span style="font-size:14px;line-height:1">▲</span>';
+      return `<span class="al-badge ${v === '●' ? 'yes' : 'maybe'} ${extra || ''}">${mark} ${h(pictOf(a))} ${h(tAllergen(a))}</span>`;
+    };
+    const man = entries.filter(([a]) => isMan(a)), rec = entries.filter(([a]) => isRec(a)), other = entries.filter(([a]) => !isMan(a) && !isRec(a));
+    let html = '';
+    if (man.length) html += `<div class="allergen-group-label big8-lbl">${h(t('特定原材料（表示義務）'))}</div><div class="allergen-chips-row" style="margin-bottom:8px">${man.map(e => badge(e, 'big8-mark')).join('')}</div>`;
+    if (rec.length) html += `<div class="allergen-group-label twenty-lbl">${h(t('推奨品目'))}</div><div class="allergen-chips-row" style="margin-bottom:8px">${rec.map(e => badge(e, 'twenty twenty-mark')).join('')}</div>`;
+    if (other.length) html += `<div class="allergen-chips-row">${other.map(e => badge(e)).join('')}</div>`;
+    chipsEl.innerHTML = html;
+  }
+  $('item-modal-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeItemModal(){
+  $('item-modal-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function handleModalOverlayClick(e){ if (e.target === $('item-modal-overlay')) closeItemModal(); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   印刷ビュー（全メニュー）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function renderPrint(){
+  const CARDS_PER_ROW = 3, PAGE_H = 256, CAT_H = 8, CARD_H = 20, GAP = 2.5;
+  const pages = [];
+  let groupsOnPage = [], usedH = 0, pageNum = 1;
+  const flush = () => {
+    const valid = groupsOnPage.filter(g => g.items.length > 0);
+    if (valid.length) pages.push({ groups: valid, num: pageNum++ });
+    groupsOnPage = []; usedH = 0;
+  };
+  for (const cat of appData.categories){
+    if (!cat.items.length) continue;
+    if (usedH > 0 && usedH + CAT_H > PAGE_H) flush();
+    let g = { cat: cat.category, emoji: cat.emoji, cont: false, items: [] };
+    usedH += CAT_H + GAP;
+    let row = [];
+    const place = () => {
+      if (usedH + CARD_H + GAP > PAGE_H){
+        if (g.items.length) groupsOnPage.push(g);
+        flush();
+        g = { cat: cat.category, emoji: cat.emoji, cont: true, items: [] };
+        usedH = CAT_H + GAP;
+      }
+      row.forEach(r => g.items.push(r));
+      usedH += CARD_H + GAP;
+      row = [];
+    };
+    for (const item of cat.items){
+      row.push(item);
+      if (row.length === CARDS_PER_ROW) place();
+    }
+    if (row.length) place();
+    if (g.items.length) groupsOnPage.push(g);
+  }
+  flush();
+  const total = pages.length;
+  let html = `<div class="print-preview-header"><div><h2>🖨️ ${currentLang === 'ja' ? `印刷プレビュー（全${total}ページ）` : `Print preview (${total} pages)`}</h2>
+    <div class="print-preview-note">${currentLang === 'ja' ? 'ブラウザの印刷設定：用紙 A4 ／ 余白 最小 ／ 背景グラフィック オン' : 'Print settings: A4 / minimum margins / background graphics on'}</div></div>
+    <button class="btn-print-exec" onclick="window.print()">🖨️ ${currentLang === 'ja' ? '印刷する' : 'Print'}</button></div>`;
+  for (const page of pages){
+    html += `<div class="print-page"><div class="print-page-header"><div class="print-page-logo">千 房 <span>CHIBO フードピクト 2026 — ${currentLang === 'ja' ? 'アレルゲン情報一覧' : 'Allergen information'}</span></div><div class="print-page-num">${page.num} / ${total}</div></div><div class="print-cards-grid">`;
+    for (const g of page.groups){
+      html += `<div class="print-cat-header">${h(g.emoji || '🍽️')} ${h(tCategory(g.cat))}${g.cont ? (currentLang === 'ja' ? '（続き）' : ' (cont.)') : ''}</div>`;
+      for (const item of g.items){
+        const al = Object.entries(item.allergens || {});
+        const tags = !al.length ? `<span class="print-no-al">${h(t('アレルゲンに該当する原材料なし'))}</span>`
+          : al.map(([a, m]) => m === '●' ? `<span class="print-al-yes">●${h(tAllergen(a))}</span>` : `<span class="print-al-maybe">▲${h(tAllergen(a))}</span>`).join('');
+        html += `<div class="print-card"><div class="print-card-body"><div class="print-card-name">${h(tItem(item.name))}</div><div class="print-allergen-row">${tags}</div></div></div>`;
+      }
+    }
+    html += `</div><div class="print-page-footer"><span><span class="print-al-yes">●${h(t('含む'))}</span></span><span><span class="print-al-maybe">▲${h(t('製造工程での混入可能性あり'))}</span></span><span style="margin-left:auto;">※${h(t('アレルギーをお持ちのお客様はスタッフにお申し付けください'))}</span></div></div>`;
+  }
+  $('print-container').innerHTML = html;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   起動
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function _init(){
+  document.addEventListener('click', () => closeLangMenu());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeItemModal(); });
+
+  $('cat-list').addEventListener('click', e => {
+    const g = e.target.closest('button[data-group]');
+    if (g){ e.stopPropagation(); const name = g.dataset.group; openGroups[name] = openGroups[name] === false; buildCatList(); return; }
+    const btn = e.target.closest('button[data-cat]'); if (!btn) return;
+    activeStoreOnly = false;
+    activeCat = btn.dataset.cat || null;
+    render();
+  });
+  $('allergen-chips').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-allergen]'); if (!btn) return;
+    const a = btn.dataset.allergen;
+    selectedAllergens.has(a) ? selectedAllergens.delete(a) : selectedAllergens.add(a);
+    buildChips();
+    $('customer-banner').style.display = selectedAllergens.size > 0 ? 'none' : '';
+    render();
+  });
+  const openFromRef = e => {
+    const el = e.target.closest('[data-ref]'); if (!el) return;
+    const [ci, ii] = el.dataset.ref.split(':').map(Number);
+    openItemModal(ci, ii);
+  };
+  $('table-view').addEventListener('click', openFromRef);
+  $('card-view').addEventListener('click', openFromRef);
+  $('search').addEventListener('input', e => { searchQuery = e.target.value.trim(); render(); });
+
+  _applyLangToDOM();
+  render();
+  loadMenu().then(loadStoreListIntoSelector);
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _init);
+else _init();
+
+</script>
+</body>
+</html>
